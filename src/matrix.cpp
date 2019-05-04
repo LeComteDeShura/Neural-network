@@ -17,3 +17,28 @@ matrix::matrix()
         mat[i] = new float[cols];
     }
 }
+
+matrix::matrix(int r, int c, int total ){
+
+
+    rows = r;
+    cols = c;
+    mat = new float *[rows];
+    for (int i = 0; i < rows; i++) {
+        mat[i] = new float [cols];
+    }
+
+    if (total == 0) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                mat[i][j] = 0;
+            }
+        }
+    }
+
+    if(total == 1){
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+                mat[i][j] = randM(0.1, 0.99);
+    }
+}
