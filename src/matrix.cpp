@@ -3,6 +3,11 @@
 
 using namespace std;
 
+double randM(double M, double N)
+{
+    return (M + (rand() / (RAND_MAX / (N - M)))) - 0.5;
+}
+
 matrix::matrix()
 {
     rows = 1;
