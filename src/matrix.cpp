@@ -81,3 +81,20 @@ matrix matrix::transpose(){
     }
     return Matrixp;
 }
+
+matrix matrix_multiplication(matrix Matrix1, matrix Matrix2){
+    matrix Matrixp(Matrix1.rows, Matrix2.cols);
+
+    float temp = 0.0;
+    for (int i = 0; i < Matrix1.rows; i++){
+        for (int j = 0; j < Matrix2.cols; j++){
+            for(int k = 0; k < Matrix1.cols; k++){
+                 temp += Matrix1.mat[i][k] * Matrix2.mat[k][j];
+            }
+            Matrixp.mat[i][j] = temp;
+            temp = 0.0;
+        }
+    }
+
+    return Matrixp;
+}
