@@ -65,3 +65,17 @@ TEST_CASE("matrix override using func init", "[init]")
     REQUIRE(matr.rows == rows);
     REQUIRE(matr.cols == cols);
 }
+
+TEST_CASE("matrix transposition", "[transpose]")
+{
+    int rows = 5;
+    int cols = 2;
+    matrix matr(rows, cols, 1);
+    matrix matrT;
+
+    matrT = matr.transpose();
+
+    REQUIRE(matrT.mat != NULL);
+    REQUIRE(matrT.rows == matr.cols);
+    REQUIRE(matrT.cols == matr.rows);
+}
