@@ -107,3 +107,15 @@ void matrix::free()
     }
     delete[] mat;
 }
+
+matrix matrix::operator-(matrix matr)
+{
+    matrix Matrixp(rows, cols);
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            Matrixp.mat[i][j] = mat[i][j] - matr.mat[i][j];
+        }
+    }
+    return Matrixp;
+}
