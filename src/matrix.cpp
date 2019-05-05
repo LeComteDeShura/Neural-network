@@ -70,3 +70,14 @@ void matrix::init(int r, int c, int total ){
                 mat[i][j] = randM(0.1, 0.99);
     }
 }
+
+matrix matrix::transpose(){
+    matrix Matrixp(cols, rows);
+
+    for(int i = 0; i < rows; ++i){
+        for(int j = 0; j < cols; ++j){
+            Matrixp.mat[j][i] = mat[i][j];
+        }
+    }
+    return Matrixp;
+}
