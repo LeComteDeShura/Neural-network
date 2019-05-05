@@ -119,3 +119,15 @@ matrix matrix::operator-(matrix matr)
     }
     return Matrixp;
 }
+
+matrix  matrix::operator* (matrix matr){
+    matrix Matrixp(rows, cols);
+
+    for (int i = 0; i < matr.rows; i++) {
+        for (int j = 0; j < matr.cols; j++) {
+            Matrixp.mat[i][j] = matr.mat[i][j] * mat[i][j];
+        }
+    }
+    add_cache(Matrixp);
+    return Matrixp;
+}
