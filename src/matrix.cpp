@@ -18,14 +18,13 @@ matrix::matrix()
     }
 }
 
-matrix::matrix(int r, int c, int total ){
-
-
+matrix::matrix(int r, int c, int total)
+{
     rows = r;
     cols = c;
-    mat = new float *[rows];
+    mat = new float*[rows];
     for (int i = 0; i < rows; i++) {
-        mat[i] = new float [cols];
+        mat[i] = new float[cols];
     }
 
     if (total == 0) {
@@ -36,23 +35,24 @@ matrix::matrix(int r, int c, int total ){
         }
     }
 
-    if(total == 1){
+    if (total == 1) {
         for (int i = 0; i < rows; i++)
             for (int j = 0; j < cols; j++)
                 mat[i][j] = randM(0.1, 0.99);
     }
 }
 
-void matrix::init(int r, int c, int total ){
+void matrix::init(int r, int c, int total)
+{
     for (int i = 0; i < rows; i++) {
-        delete []mat[i];
+        delete[] mat[i];
     }
-    delete []mat;
+    delete[] mat;
     rows = r;
     cols = c;
-    mat = new float *[rows];
+    mat = new float*[rows];
     for (int i = 0; i < rows; i++) {
-        mat[i] = new float [cols];
+        mat[i] = new float[cols];
     }
 
     if (total == 0) {
@@ -63,33 +63,34 @@ void matrix::init(int r, int c, int total ){
         }
     }
 
-
-    if(total == 1){
+    if (total == 1) {
         for (int i = 0; i < rows; i++)
             for (int j = 0; j < cols; j++)
                 mat[i][j] = randM(0.1, 0.99);
     }
 }
 
-matrix matrix::transpose(){
+matrix matrix::transpose()
+{
     matrix Matrixp(cols, rows);
 
-    for(int i = 0; i < rows; ++i){
-        for(int j = 0; j < cols; ++j){
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
             Matrixp.mat[j][i] = mat[i][j];
         }
     }
     return Matrixp;
 }
 
-matrix matrix_multiplication(matrix Matrix1, matrix Matrix2){
+matrix matrix_multiplication(matrix Matrix1, matrix Matrix2)
+{
     matrix Matrixp(Matrix1.rows, Matrix2.cols);
 
     float temp = 0.0;
-    for (int i = 0; i < Matrix1.rows; i++){
-        for (int j = 0; j < Matrix2.cols; j++){
-            for(int k = 0; k < Matrix1.cols; k++){
-                 temp += Matrix1.mat[i][k] * Matrix2.mat[k][j];
+    for (int i = 0; i < Matrix1.rows; i++) {
+        for (int j = 0; j < Matrix2.cols; j++) {
+            for (int k = 0; k < Matrix1.cols; k++) {
+                temp += Matrix1.mat[i][k] * Matrix2.mat[k][j];
             }
             Matrixp.mat[i][j] = temp;
             temp = 0.0;
@@ -97,4 +98,12 @@ matrix matrix_multiplication(matrix Matrix1, matrix Matrix2){
     }
 
     return Matrixp;
+}
+
+void matrix::free()
+{
+    for (int i = 0; i < rows; i++) {
+        delete[] mat[i];
+    }
+    delete[] mat;
 }
