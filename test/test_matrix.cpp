@@ -79,3 +79,53 @@ TEST_CASE("matrix transposition", "[transpose]")
     REQUIRE(matrT.rows == matr.cols);
     REQUIRE(matrT.cols == matr.rows);
 }
+
+TEST_CASE("matrix multiplication", "[matrix_multiplication]")
+{
+    // Given
+    matrix A(3, 2);
+    matrix B(2, 4);
+    matrix C_result;
+
+    float count = 0;
+    for (int j = 0; j < 3; j++) {     //
+        count++;                      //     | 1, 2 |
+        for (int i = 0; i < 2; i++) { // A = | 4, 5 |
+            A.mat[j][i] = count;      //     | 7, 8 |
+            count++;                  //
+        }
+    }
+
+    count = 10;                       //
+    for (int j = 0; j < 2; j++) {     // B = | 9, 8, 7, 6 |
+        count--;                      //     | 4, 3, 2, 1 |
+        for (int i = 0; i < 4; i++) { //
+            B.mat[j][i] = count;
+            count--;
+        }
+    }
+
+    // When
+    C_result = matrix_multiplication(A, B);
+
+    // Then
+    float C_expected[3][4] = {// C = A x B
+                              // |17, 14, 11, 8|
+                              // |56, 47, 38, 29|
+                              // |95, 80, 65, 50|
+
+    REQUIRE(C_result.mat != NULL);
+    REQUIRE(C_result.rows == 3);
+    REQUIRE(C_result.cols == 4);
+
+    int temp = 0;
+    for (size_t i = 0; i < 3; i++) {
+        for (size_t j = 0; j < 4; j++) {
+            if (C_result.mat[i][j] == C_expected[i][j]) {
+                temp++;
+            }
+        }
+    }
+
+    REQUIRE(temp == 12);
+}
