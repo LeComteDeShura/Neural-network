@@ -45,3 +45,23 @@ TEST_CASE("matrix is created in constructor№2", "[matrix]")
     REQUIRE(matr2.cols == cols);
     REQUIRE(matr2.mat[2][235] != 0);
 }
+
+TEST_CASE("matrix override using func init", "[init]")
+{
+    int rows = 784;
+    int cols = 10;
+    matrix matr;
+    matr.init(rows, cols);
+
+    REQUIRE(matr.mat != NULL);
+    REQUIRE(matr.rows == rows);
+    REQUIRE(matr.cols == cols);
+
+    rows = 12;
+    cols = 236;
+    matr.init(rows, cols, 1);
+
+    REQUIRE(matr.mat != NULL);
+    REQUIRE(matr.rows == rows);
+    REQUIRE(matr.cols == cols);
+}
