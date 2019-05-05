@@ -110,9 +110,9 @@ TEST_CASE("matrix multiplication", "[matrix_multiplication]")
 
     // Then
     float C_expected[3][4] = {// C = A x B
-                              // |17, 14, 11, 8|
-                              // |56, 47, 38, 29|
-                              // |95, 80, 65, 50|
+                              {17, 14, 11, 8},
+                              {56, 47, 38, 29},
+                              {95, 80, 65, 50}};
 
     REQUIRE(C_result.mat != NULL);
     REQUIRE(C_result.rows == 3);
@@ -128,4 +128,49 @@ TEST_CASE("matrix multiplication", "[matrix_multiplication]")
     }
 
     REQUIRE(temp == 12);
+}
+
+TEST_CASE("overloading - (matrix - matrix)", "[Operator overloading]")
+{
+    // Given
+    matrix A(2, 2);
+    matrix B(2, 2);
+    matrix C_result;
+
+    float count = 0;                  //
+    for (int j = 0; j < 2; j++) {     // A = | 1, 2 |
+        count++;                      //     | 4, 5 |
+        for (int i = 0; i < 2; i++) { //
+            A.mat[j][i] = count;
+            count++;
+        }
+    }
+
+    count = 10;                       //
+    for (int j = 0; j < 2; j++) {     // B = | 9, 8 |
+        count--;                      //     | 6, 5 |
+        for (int i = 0; i < 2; i++) { //
+            B.mat[j][i] = count;
+            count--;
+        }
+    }
+
+    // When
+    C_result = A - B;
+
+    // Then
+    float C_expected[2][2] = {// C_expected = A - B;
+                              {-8, -6},
+                              {-2, 0}};
+
+    int temp = 0;
+    for (size_t i = 0; i < 2; i++) {
+        for (size_t j = 0; j < 2; j++) {
+            if (C_result.mat[i][j] == C_expected[i][j]) {
+                temp++;
+            }
+        }
+    }
+
+    REQUIRE(temp == 4);
 }
