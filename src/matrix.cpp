@@ -142,3 +142,25 @@ matrix matrix::operator+ (matrix matr){
     }
     return Matrixp;
 }
+
+matrix operator- (float ci,  matrix matr){
+    matrix Matrixp(matr.rows, matr.cols);
+
+    for (int i = 0; i < matr.rows; i++) {
+        for (int j = 0; j < matr.cols; j++) {
+            Matrixp.mat[i][j] = ci -  matr.mat[i][j];
+        }
+    }
+    return Matrixp;
+}
+
+matrix operator- (matrix matr,  float ci){
+    matrix Matrixp(matr.rows, matr.cols);
+
+    for (int i = 0; i < matr.rows; i++) {
+        for (int j = 0; j < matr.cols; j++) {
+            Matrixp.mat[i][j] = matr.mat[i][j] - ci;
+        }
+    }
+    return Matrixp;
+}
