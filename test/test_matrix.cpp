@@ -299,3 +299,38 @@ TEST_CASE("overloading - (matrix - number)", "[Operator overloading]")
 
     REQUIRE(temp == 4);
 }
+
+TEST_CASE("overloading + (matrix + number)", "[Operator overloading]")
+{
+    // Given
+    matrix A(2, 2);
+    matrix C_result;
+
+    float count = 0;                  //
+    for (int j = 0; j < 2; j++) {     // A = | 1, 2 |
+        count++;                      //     | 4, 5 |
+        for (int i = 0; i < 2; i++) { //
+            A.mat[j][i] = count;
+            count++;
+        }
+    }
+
+    // When
+    C_result = A + 13;
+
+    // Then
+    float C_expected[2][2] = {// C_expected = A + 13;
+                              {14, 15},
+                              {17, 18}};
+
+    int temp = 0;
+    for (size_t i = 0; i < 2; i++) {
+        for (size_t j = 0; j < 2; j++) {
+            if (C_result.mat[i][j] == C_expected[i][j]) {
+                temp++;
+            }
+        }
+    }
+
+    REQUIRE(temp == 4);
+}
