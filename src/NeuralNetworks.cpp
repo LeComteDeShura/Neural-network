@@ -14,3 +14,16 @@ matrix sigmoida(matrix Matrix){
     }
     return Matrixp;
 }
+
+NeuralNetwork::NeuralNetwork( int input_nodes, int hidden_nodes, int output_nodes, float learningrate, int era, int cycles)
+{
+    in = input_nodes;
+    hn = hidden_nodes;
+    on = output_nodes;
+
+    er = era;
+    cyc = cycles;
+    count = 0;
+    wih.init(hn, in, 1);
+    who.init(on, hn, 1);
+}
