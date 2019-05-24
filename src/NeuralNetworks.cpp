@@ -67,3 +67,18 @@ void NeuralNetwork::init_w()
 
     fclose(file);
 }
+
+matrix NeuralNetwork::recognition(matrix inputs)
+{
+    hidden_inputs = matrix_multiplication(wih, inputs);
+    hidden_outputs = sigmoida(hidden_inputs);
+
+    final_inputs = matrix_multiplication(who, hidden_outputs);
+    final_outputs = sigmoida(final_inputs);
+
+    hidden_inputs.free();
+    hidden_outputs.free();
+    final_inputs.free();
+
+    return final_outputs;
+}
