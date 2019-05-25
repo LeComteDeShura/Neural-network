@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "matrix.h"
-#include "NeuralNetworks.h"
+#include "NeuralNetwork.h"
 #include "catch.hpp"
 #include <iostream>
 
@@ -34,6 +34,46 @@ TEST_CASE("calc_test", "[sigmoida]")
             }
         }
     }
-    std::cout << B.mat[1][0] << '\n' << C.mat[1][0];
     REQUIRE(count == 4);
+}
+
+TEST_CASE("calc_test_recognition", "[recognition]")
+{
+    NeuralNetwork nn(2, 2, 2, 0.333, 1, 1);
+
+    nn.wih.mat[0][0] = 2;
+    nn.wih.mat[1][0] = 2;
+    nn.wih.mat[0][1] = 2;
+    nn.wih.mat[1][1] = 2;
+
+    nn.who.mat[1][0] = 2;
+    nn.who.mat[0][0] = 2;
+    nn.who.mat[0][1] = 2;
+    nn.who.mat[1][1] = 2;
+
+    matrix input(2, 2);
+    input.mat[1][0] = 2;
+    input.mat[0][0] = 2;
+    input.mat[0][1] = 2;
+    input.mat[1][1] = 2;
+
+
+    matrix exp(2, 2);
+    exp.mat[1][0] = 0.9819;
+    exp.mat[0][0] = 0.9819;
+    exp.mat[0][1] = 0.9819;
+    exp.mat[1][1] = 0.9819;
+
+
+    input = nn.recognition(input);
+
+    input.mat[0][0] = int(input.mat[0][0] * 10000)/10000.0;
+    input.mat[1][0] = int(input.mat[1][0] * 10000)/10000.0;
+    input.mat[1][1] = int(input.mat[1][1] * 10000)/10000.0;
+    input.mat[0][1] = int(input.mat[0][1] * 10000)/10000.0;
+
+    REQUIRE(exp.mat[0][0] == input.mat[1][0]);
+    REQUIRE(exp.mat[0][0] == input.mat[0][0]);
+    REQUIRE(exp.mat[0][0] == input.mat[1][1]);
+    REQUIRE(exp.mat[0][0] == input.mat[0][1]);
 }
