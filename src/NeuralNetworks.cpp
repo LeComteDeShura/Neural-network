@@ -28,6 +28,66 @@ NeuralNetwork::NeuralNetwork( int input_nodes, int hidden_nodes, int output_node
     who.init(on, hn, 1);
 }
 
+void NeuralNetwork::train(matrix inputs, matrix targets)
+{
+    hidden_inputs = matrix_multiplication(wih, inputs);
+    hidden_outputs = sigmoida(hidden_inputs);
+
+    final_inputs = matrix_multiplication(who, hidden_outputs);
+    final_outputs = sigmoida(final_inputs);
+
+    output_errors = targets - final_outputs;
+    whoT = who.transpose();
+    hidden_errors = matrix_multiplication(whoT, output_errors);
+
+
+    a = hidden_outputs.transpose();
+    b = 1.0 - final_outputs;
+    c = output_errors * final_outputs;
+    d = b * c;
+    e = matrix_multiplication(d, a);
+    f = e * LR;
+    for (int i = 0; i < on; i++) {
+        for (int j = 0; j < hn; j++) {
+            who.mat[i][j] = who.mat[i][j] + f.mat[i][j];
+        }
+    }
+
+
+    g = inputs.transpose();
+    h = 1.0 - hidden_outputs;
+    p = hidden_errors * hidden_outputs;
+    l = h * p;
+    k = matrix_multiplication(l, g);
+    m = k * LR;
+    for (int i = 0; i < hn; i++) {
+        for (int j = 0; j < in; j++) {
+            wih.mat[i][j] = wih.mat[i][j] + m.mat[i][j];
+        }
+    }
+
+    if (count == (cyc-1) * er) {
+        FILE* file;
+        file = fopen("csvfiles//w.csv", "w");
+        for (int i = 0; i < hn; i++) {
+            for (int j = 0; j < in; j++) {
+                fprintf(file, "%f,", wih.mat[i][j]);
+            }
+        }
+        fprintf(file, "\n");
+
+        for (int i = 0; i < on; i++) {
+            for (int j = 0; j < hn; j++) {
+                fprintf(file, "%f,", who.mat[i][j]);
+            }
+        }
+        fclose(file);
+    }
+    count++;
+
+    freeAll();
+}
+
 void NeuralNetwork::init_w()
 {
     FILE* file;
