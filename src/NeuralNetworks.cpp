@@ -142,3 +142,28 @@ matrix NeuralNetwork::recognition(matrix inputs)
 
     return final_outputs;
 }
+
+void NeuralNetwork::freeAll()
+{
+    hidden_inputs.free();
+    hidden_outputs.free();
+    final_inputs.free();
+    final_outputs.free();
+    hidden_errors.free();
+    output_errors.free();
+    a.free();
+    b.free();
+    c.free();
+    d.free();
+    e.free();
+    f.free();
+
+    g.free();
+    h.free();
+    p.free();
+    l.free();
+    k.free();
+    m.free();
+
+    whoT.free();
+}
