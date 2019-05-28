@@ -97,3 +97,44 @@ void launchTestEfficiency(NeuralNetwork ner)
               << "эффективность - " << (count_label / (count + 0.1)) * 100.1
               << '%' << '\n';
 }
+
+void launchRecognition(NeuralNetwork ner)
+{
+    char path[40] = "image//";
+    char name[20];
+    std::cout << "Enter image name: " << '\n';
+    cin >> name;
+    strcat(path, name);
+
+    int width = 28, height = 28, bpp = 1;
+    uint8_t* image = stbi_load(path, &width, &height, &bpp, 1);
+
+    matrix inputs(ner.in , 1);
+    int i = 0;
+    while (i < ner.in) {
+        inputs.mat[i][0] = float(255 - unsigned(image[i]));
+        i++;
+    }
+
+    ner.init_w();
+
+    for (int i = 1; i < ner.in; i++) {
+        inputs.mat[i][0] = (inputs.mat[i][0] / 255.001 * 0.99) + 0.01;
+    }
+
+    matrix final_outputs;
+    final_outputs = ner.recognition(inputs);
+
+    float max;
+    max = final_outputs.mat[0][0];
+    int label = 0;
+    for (int i = 0; i < ner.on; i++) {
+        if (max < final_outputs.mat[i][0]) {
+            label = i;
+            max = final_outputs.mat[i][0];
+        }
+    }
+
+    std::cout << '\n';
+    cout << "answer network - " << label << '\n';
+}
