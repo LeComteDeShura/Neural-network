@@ -145,7 +145,6 @@ matrix  matrix::operator* (matrix matr){
             Matrixp.mat[i][j] = matr.mat[i][j] * mat[i][j];
         }
     }
-    add_cache(Matrixp);
     return Matrixp;
 }
 
