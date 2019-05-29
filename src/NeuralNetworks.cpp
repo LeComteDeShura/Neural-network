@@ -46,7 +46,7 @@ void NeuralNetwork::train(matrix inputs, matrix targets)
     c = output_errors * final_outputs;
     d = b * c;
     e = matrix_multiplication(d, a);
-    f = e * LR;
+    f = e * 0.3;
     for (int i = 0; i < on; i++) {
         for (int j = 0; j < hn; j++) {
             who.mat[i][j] = who.mat[i][j] + f.mat[i][j];
@@ -59,7 +59,7 @@ void NeuralNetwork::train(matrix inputs, matrix targets)
     p = hidden_errors * hidden_outputs;
     l = h * p;
     k = matrix_multiplication(l, g);
-    m = k * LR;
+    m = k * 0.3;
     for (int i = 0; i < hn; i++) {
         for (int j = 0; j < in; j++) {
             wih.mat[i][j] = wih.mat[i][j] + m.mat[i][j];
