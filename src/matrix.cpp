@@ -82,6 +82,23 @@ matrix matrix::transpose()
     return Matrixp;
 }
 
+void matrix::operator= (matrix matr){
+    rows = matr.rows;
+    cols = matr.cols;
+
+    mat = new float*[rows];
+    for (int i = 0; i < rows; i++) {
+        mat[i] = new float[cols];
+    }
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            mat[i][j] = matr.mat[i][j];
+        }
+    }
+
+    matr.free();
+}
+
 matrix matrix_multiplication(matrix Matrix1, matrix Matrix2)
 {
     matrix Matrixp(Matrix1.rows, Matrix2.cols);
