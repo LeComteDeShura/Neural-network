@@ -69,7 +69,7 @@ void NeuralNetwork::train(matrix inputs, matrix targets)
 
     if (count == (cyc-1) * er) {
         FILE* file;
-        file = fopen("csvfiles//w.csv", "w");
+        file = fopen("..//inputs//csvfiles//w.csv", "w");
         for (int i = 0; i < hn; i++) {
             for (int j = 0; j < in; j++) {
                 fprintf(file, "%f,", wih.mat[i][j]);
@@ -96,7 +96,7 @@ void NeuralNetwork::init_w()
     char* pch;
     char buff[4500000];
 
-    file = fopen("csvfiles//w.csv", "r");
+    file = fopen("..//inputs//csvfiles//w.csv", "r");
 
     mass = fgets(buff, 4000000, file);
 
