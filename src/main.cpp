@@ -9,8 +9,8 @@
 using namespace std;
 
 void launchTrain(NeuralNetwork ner);
-void launchRecognition(NeuralNetwork ner);
-void launchTestEfficiency(NeuralNetwork ner);
+int launchRecognition(NeuralNetwork ner);
+float launchTestEfficiency(NeuralNetwork ner);
 
 int main() {
     int input_nodes = 784;
