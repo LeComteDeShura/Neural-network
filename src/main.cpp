@@ -73,7 +73,7 @@ void launchTrain(NeuralNetwork ner)
 
 
     for (int era = 0; era < ner.er; era++) {
-        file = fopen("csvfiles//mnist_train.csv", "r");
+        file = fopen("..//inputs//csvfiles//mnist_train.csv", "r");
         int count = 0;
         while (count < ner.cyc) {
             mass = fgets(buff, 20000, file);
@@ -103,7 +103,7 @@ float launchTestEfficiency(NeuralNetwork ner)
     char* mass;
     char* pch;
     char buff[5000];
-    file = fopen("csvfiles//mnist_test.csv", "r");
+    file = fopen("..//inputs//csvfiles//mnist_test.csv", "r");
     matrix inputs(784, 1);
     int count_label = 0;
     matrix final_outputs;
@@ -147,7 +147,7 @@ float launchTestEfficiency(NeuralNetwork ner)
 
 int launchRecognition(NeuralNetwork ner)
 {
-    char path[40] = "image//";
+    char path[40] = "..//inputs//image//";
     char name[20];
     cout << "Enter image name: ";
     cin >> name;
