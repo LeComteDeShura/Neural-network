@@ -22,7 +22,39 @@ int main() {
 
     NeuralNetwork nn(input_nodes, hidden_nodes, output_nodes, learning_rate, era, cycles);
 
-    
+    int label;
+    float efficiency;
+    int choise;
+    while (1) {
+        cout << "1. Train" << '\n'
+             << "2. Efficiency test" << '\n'
+             << "3. Test" << '\n'
+             << "4. Exit" << '\n'
+             << "Enter: ";
+        cin >> choise;
+        cout << '\n';
+
+        switch (choise) {
+        case 1:
+            cout << "Please wait" << "\n\n";
+            launchTrain(nn);
+            continue;
+
+        case 2:
+            cout << "Please wait" << "\n\n";
+            efficiency = launchTestEfficiency(nn);
+            cout << "Efficiency - " << efficiency << '%' << "\n\n";
+            continue;
+
+        case 3:
+            label = launchRecognition(nn);
+            cout << "Network response - " << label << "\n\n";
+            continue;
+
+        case 4:
+            return 0;
+        }
+    }
 
     return 0;
 }
