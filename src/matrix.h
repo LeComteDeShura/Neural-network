@@ -16,7 +16,7 @@ public:
     matrix operator-(matrix matr);
     void show(int total = 0);
     void free();
-    matrix operator=(matrix matr);
+    void operator= (matrix matr);
     matrix operator*(matrix matr);
     matrix operator+(matrix matr);
 };
