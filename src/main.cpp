@@ -1,13 +1,19 @@
 #include "NeuralNetworks.h"
 #include "matrix.h"
 #include <iostream>
+#include <iostream>
+#include "stb_image.h"
+#include <cstring>
+#define LR 0.25000
 
+using namespace std;
 
 void launchTrain(NeuralNetwork ner);
 void launchRecognition(NeuralNetwork ner);
+void launchTestEfficiency(NeuralNetwork ner);
 
 int main() {
-
+    
     return 0;
 }
 
@@ -22,8 +28,9 @@ void launchTrain(NeuralNetwork ner)
     matrix targets(ner.on, 1);
     int correct_label;
 
+
     for (int era = 0; era < ner.er; era++) {
-        file = fopen("mnist_train.csv", "r");
+        file = fopen("csvfiles//mnist_train.csv", "r");
         int count = 0;
         while (count < ner.cyc) {
             mass = fgets(buff, 20000, file);
@@ -46,21 +53,20 @@ void launchTrain(NeuralNetwork ner)
     }
 }
 
-void launchTestEfficiency(NeuralNetwork ner)
+float launchTestEfficiency(NeuralNetwork ner)
 {
+
     FILE* file;
     char* mass;
     char* pch;
     char buff[5000];
-    file = fopen("mnist_test.csv", "r");
-
+    file = fopen("csvfiles//mnist_test.csv", "r");
     matrix inputs(784, 1);
+    int count_label = 0;
     matrix final_outputs;
-
     float max;
     int label;
     int correct_label;
-    int count_label = 0;
 
     ner.init_w();
 
@@ -93,16 +99,14 @@ void launchTestEfficiency(NeuralNetwork ner)
     }
 
     fclose(file);
-    std::cout << '\n'
-              << "эффективность - " << (count_label / (count + 0.1)) * 100.1
-              << '%' << '\n';
+    return (count_label / (count + 0.1)) * 100.1;
 }
 
-void launchRecognition(NeuralNetwork ner)
+int launchRecognition(NeuralNetwork ner)
 {
     char path[40] = "image//";
     char name[20];
-    std::cout << "Enter image name: " << '\n';
+    cout << "Enter image name: ";
     cin >> name;
     strcat(path, name);
 
@@ -135,6 +139,5 @@ void launchRecognition(NeuralNetwork ner)
         }
     }
 
-    std::cout << '\n';
-    cout << "answer network - " << label << '\n';
+    return label;
 }
