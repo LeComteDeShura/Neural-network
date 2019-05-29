@@ -13,7 +13,17 @@ void launchRecognition(NeuralNetwork ner);
 void launchTestEfficiency(NeuralNetwork ner);
 
 int main() {
+    int input_nodes = 784;
+    int hidden_nodes = 500;
+    int output_nodes = 10;
+    int era = 10;
+    int cycles = 60054;
+    float learning_rate = LR;
+
+    NeuralNetwork nn(input_nodes, hidden_nodes, output_nodes, learning_rate, era, cycles);
+
     
+
     return 0;
 }
 
