@@ -2,6 +2,7 @@
 #include "matrix.h"
 #include <iostream>
 #include <iostream>
+#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include <cstring>
 #define LR 0.25000
