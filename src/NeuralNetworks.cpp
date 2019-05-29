@@ -2,6 +2,7 @@
 #include "matrix.h"
 #include "NeuralNetworks.h"
 #include <cmath>
+#include <cstring>
 
 matrix sigmoida(matrix Matrix){
     float e = 2.7180;
