@@ -1,1 +1,20 @@
+language: cpp
+compiler: g++
+sudo: require
 
+dist: xenial
+
+os: linux
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+
+before_install:
+  - sudo apt update
+  - sudo apt install g++-7
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 40
+
+script:
+  - make && make test1 && make test2 && make run_tests
+  - git ls-files src/ | xargs clang-format -i && git diff --exit-code
