@@ -29,7 +29,7 @@ int main() {
     while (1) {
         cout << "1. Train" << '\n'
              << "2. Efficiency test" << '\n'
-             << "3. Test" << '\n'
+             << "3. Recognition" << '\n'
              << "4. Exit" << '\n'
              << "Enter: ";
         cin >> choise;
