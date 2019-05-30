@@ -72,10 +72,10 @@ TEST_CASE("calc_test_recognition", "[recognition]")
     input.mat[1][1] = int(input.mat[1][1] * 10000)/10000.0;
     input.mat[0][1] = int(input.mat[0][1] * 10000)/10000.0;
 
-    REQUIRE(exp.mat[0][0] == input.mat[1][0]);
+    REQUIRE(exp.mat[1][0] == input.mat[1][0]);
     REQUIRE(exp.mat[0][0] == input.mat[0][0]);
-    REQUIRE(exp.mat[0][0] == input.mat[1][1]);
-    REQUIRE(exp.mat[0][0] == input.mat[0][1]);
+    REQUIRE(exp.mat[1][1] == input.mat[1][1]);
+    REQUIRE(exp.mat[0][1] == input.mat[0][1]);
 }
 
 TEST_CASE("calc_test_train", "[train]")
