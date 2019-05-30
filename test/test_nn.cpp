@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "matrix.h"
-#include "NeuralNetwork.h"
+#include "NeuralNetworks.h"
 #include "catch.hpp"
 #include <iostream>
 
@@ -72,10 +72,10 @@ TEST_CASE("calc_test_recognition", "[recognition]")
     input.mat[1][1] = int(input.mat[1][1] * 10000)/10000.0;
     input.mat[0][1] = int(input.mat[0][1] * 10000)/10000.0;
 
-    REQUIRE(exp.mat[0][0] == input.mat[1][0]);
+    REQUIRE(exp.mat[1][0] == input.mat[1][0]);
     REQUIRE(exp.mat[0][0] == input.mat[0][0]);
-    REQUIRE(exp.mat[0][0] == input.mat[1][1]);
-    REQUIRE(exp.mat[0][0] == input.mat[0][1]);
+    REQUIRE(exp.mat[1][1] == input.mat[1][1]);
+    REQUIRE(exp.mat[0][1] == input.mat[0][1]);
 }
 
 TEST_CASE("calc_test_train", "[train]")
@@ -106,15 +106,15 @@ TEST_CASE("calc_test_train", "[train]")
 
 
     matrix exp_wih(2, 2);
-    exp_wih.mat[1][0] = 1.99908;
-    exp_wih.mat[0][0] = 1.99908;
-    exp_wih.mat[0][1] = 1.99908;
-    exp_wih.mat[1][1] = 1.99908;
+    exp_wih.mat[1][0] = 1.9989;
+    exp_wih.mat[0][0] = 1.9989;
+    exp_wih.mat[0][1] = 1.9989;
+    exp_wih.mat[1][1] = 1.9989;
     matrix exp_who(2, 2);
-    exp_who.mat[1][0] = 1.99573;
-    exp_who.mat[0][0] = 1.9922;
-    exp_who.mat[0][1] = 1.9922;
-    exp_who.mat[1][1] = 1.99573;
+    exp_who.mat[1][0] = 1.99488;
+    exp_who.mat[0][0] = 1.99064;
+    exp_who.mat[0][1] = 1.99064;
+    exp_who.mat[1][1] = 1.99488;
 
     nn.train(input, targets);
 

@@ -1,7 +1,7 @@
 #include "NeuralNetworks.h"
 #include "matrix.h"
 #include <iostream>
-#include <iostream>
+#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include <cstring>
 #define LR 0.25000
@@ -9,10 +9,11 @@
 using namespace std;
 
 void launchTrain(NeuralNetwork ner);
-void launchRecognition(NeuralNetwork ner);
-void launchTestEfficiency(NeuralNetwork ner);
+int launchRecognition(NeuralNetwork ner);
+float launchTestEfficiency(NeuralNetwork ner);
 
-int main() {
+int main()
+{
     int input_nodes = 784;
     int hidden_nodes = 500;
     int output_nodes = 10;
@@ -20,7 +21,13 @@ int main() {
     int cycles = 60054;
     float learning_rate = LR;
 
-    NeuralNetwork nn(input_nodes, hidden_nodes, output_nodes, learning_rate, era, cycles);
+    NeuralNetwork nn(
+            input_nodes,
+            hidden_nodes,
+            output_nodes,
+            learning_rate,
+            era,
+            cycles);
 
     int label;
     float efficiency;
@@ -28,7 +35,7 @@ int main() {
     while (1) {
         cout << "1. Train" << '\n'
              << "2. Efficiency test" << '\n'
-             << "3. Test" << '\n'
+             << "3. Recognition" << '\n'
              << "4. Exit" << '\n'
              << "Enter: ";
         cin >> choise;
@@ -36,12 +43,14 @@ int main() {
 
         switch (choise) {
         case 1:
-            cout << "Please wait" << "\n\n";
+            cout << "Please wait"
+                 << "\n\n";
             launchTrain(nn);
             continue;
 
         case 2:
-            cout << "Please wait" << "\n\n";
+            cout << "Please wait"
+                 << "\n\n";
             efficiency = launchTestEfficiency(nn);
             cout << "Efficiency - " << efficiency << '%' << "\n\n";
             continue;
@@ -70,9 +79,8 @@ void launchTrain(NeuralNetwork ner)
     matrix targets(ner.on, 1);
     int correct_label;
 
-
     for (int era = 0; era < ner.er; era++) {
-        file = fopen("csvfiles//mnist_train.csv", "r");
+        file = fopen("..//inputs//csvfiles//mnist_train.csv", "r");
         int count = 0;
         while (count < ner.cyc) {
             mass = fgets(buff, 20000, file);
@@ -97,12 +105,11 @@ void launchTrain(NeuralNetwork ner)
 
 float launchTestEfficiency(NeuralNetwork ner)
 {
-
     FILE* file;
     char* mass;
     char* pch;
     char buff[5000];
-    file = fopen("csvfiles//mnist_test.csv", "r");
+    file = fopen("..//inputs//csvfiles//mnist_test.csv", "r");
     matrix inputs(784, 1);
     int count_label = 0;
     matrix final_outputs;
@@ -146,7 +153,7 @@ float launchTestEfficiency(NeuralNetwork ner)
 
 int launchRecognition(NeuralNetwork ner)
 {
-    char path[40] = "image//";
+    char path[40] = "..//inputs//image//";
     char name[20];
     cout << "Enter image name: ";
     cin >> name;
@@ -155,7 +162,7 @@ int launchRecognition(NeuralNetwork ner)
     int width = 28, height = 28, bpp = 1;
     uint8_t* image = stbi_load(path, &width, &height, &bpp, 1);
 
-    matrix inputs(ner.in , 1);
+    matrix inputs(ner.in, 1);
     int i = 0;
     while (i < ner.in) {
         inputs.mat[i][0] = float(255 - unsigned(image[i]));
