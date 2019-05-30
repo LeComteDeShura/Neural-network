@@ -32,6 +32,7 @@ int main()
     int label;
     float efficiency;
     int choise;
+
     while (1) {
         cout << "1. Train" << '\n'
              << "2. Efficiency test" << '\n'
@@ -46,6 +47,11 @@ int main()
             cout << "Please wait"
                  << "\n\n";
             launchTrain(nn);
+            cout << "Done"
+                 << "\n\n";
+            cout << "Press enter to continue..." << '\n';
+            cin.get();
+            cin.get();
             continue;
 
         case 2:
@@ -53,11 +59,17 @@ int main()
                  << "\n\n";
             efficiency = launchTestEfficiency(nn);
             cout << "Efficiency - " << efficiency << '%' << "\n\n";
+            cout << "Press enter to continue..." << '\n';
+            cin.get();
+            cin.get();
             continue;
 
         case 3:
             label = launchRecognition(nn);
             cout << "Network response - " << label << "\n\n";
+            cout << "Press enter to continue..." << '\n';
+            cin.get();
+            cin.get();
             continue;
 
         case 4:
