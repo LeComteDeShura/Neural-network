@@ -1,7 +1,6 @@
 #include "NeuralNetworks.h"
 #include "matrix.h"
 #include <iostream>
-#include <iostream>
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include <cstring>
@@ -13,7 +12,8 @@ void launchTrain(NeuralNetwork ner);
 int launchRecognition(NeuralNetwork ner);
 float launchTestEfficiency(NeuralNetwork ner);
 
-int main() {
+int main()
+{
     int input_nodes = 784;
     int hidden_nodes = 500;
     int output_nodes = 10;
@@ -21,7 +21,13 @@ int main() {
     int cycles = 60054;
     float learning_rate = LR;
 
-    NeuralNetwork nn(input_nodes, hidden_nodes, output_nodes, learning_rate, era, cycles);
+    NeuralNetwork nn(
+            input_nodes,
+            hidden_nodes,
+            output_nodes,
+            learning_rate,
+            era,
+            cycles);
 
     int label;
     float efficiency;
@@ -37,12 +43,14 @@ int main() {
 
         switch (choise) {
         case 1:
-            cout << "Please wait" << "\n\n";
+            cout << "Please wait"
+                 << "\n\n";
             launchTrain(nn);
             continue;
 
         case 2:
-            cout << "Please wait" << "\n\n";
+            cout << "Please wait"
+                 << "\n\n";
             efficiency = launchTestEfficiency(nn);
             cout << "Efficiency - " << efficiency << '%' << "\n\n";
             continue;
@@ -71,7 +79,6 @@ void launchTrain(NeuralNetwork ner)
     matrix targets(ner.on, 1);
     int correct_label;
 
-
     for (int era = 0; era < ner.er; era++) {
         file = fopen("..//inputs//csvfiles//mnist_train.csv", "r");
         int count = 0;
@@ -98,7 +105,6 @@ void launchTrain(NeuralNetwork ner)
 
 float launchTestEfficiency(NeuralNetwork ner)
 {
-
     FILE* file;
     char* mass;
     char* pch;
@@ -156,7 +162,7 @@ int launchRecognition(NeuralNetwork ner)
     int width = 28, height = 28, bpp = 1;
     uint8_t* image = stbi_load(path, &width, &height, &bpp, 1);
 
-    matrix inputs(ner.in , 1);
+    matrix inputs(ner.in, 1);
     int i = 0;
     while (i < ner.in) {
         inputs.mat[i][0] = float(255 - unsigned(image[i]));

@@ -1,22 +1,29 @@
-#include <iostream>
-#include "matrix.h"
 #include "NeuralNetworks.h"
+#include "matrix.h"
 #include <cmath>
 #include <cstring>
+#include <iostream>
 
-matrix sigmoida(matrix Matrix){
+matrix sigmoida(matrix Matrix)
+{
     float e = 2.7180;
     matrix Matrixp(Matrix.rows, Matrix.cols);
 
     for (int i = 0; i < Matrix.rows; i++) {
         for (int j = 0; j < Matrix.cols; j++) {
-             Matrixp.mat[i][j] = 1 / (1 + pow(e, (Matrix.mat[i][j] * -1)));
+            Matrixp.mat[i][j] = 1 / (1 + pow(e, (Matrix.mat[i][j] * -1)));
         }
     }
     return Matrixp;
 }
 
-NeuralNetwork::NeuralNetwork( int input_nodes, int hidden_nodes, int output_nodes, float learningrate, int era, int cycles)
+NeuralNetwork::NeuralNetwork(
+        int input_nodes,
+        int hidden_nodes,
+        int output_nodes,
+        float learningrate,
+        int era,
+        int cycles)
 {
     in = input_nodes;
     hn = hidden_nodes;
@@ -41,7 +48,6 @@ void NeuralNetwork::train(matrix inputs, matrix targets)
     whoT = who.transpose();
     hidden_errors = matrix_multiplication(whoT, output_errors);
 
-
     a = hidden_outputs.transpose();
     b = 1.0 - final_outputs;
     c = output_errors * final_outputs;
@@ -53,7 +59,6 @@ void NeuralNetwork::train(matrix inputs, matrix targets)
             who.mat[i][j] = who.mat[i][j] + f.mat[i][j];
         }
     }
-
 
     g = inputs.transpose();
     h = 1.0 - hidden_outputs;
@@ -67,7 +72,7 @@ void NeuralNetwork::train(matrix inputs, matrix targets)
         }
     }
 
-    if (count == (cyc-1) * er) {
+    if (count == (cyc - 1) * er) {
         FILE* file;
         file = fopen("..//inputs//csvfiles//w.csv", "w");
         for (int i = 0; i < hn; i++) {
