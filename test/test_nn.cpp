@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "matrix.h"
-#include "NeuralNetwork.h"
+#include "NeuralNetworks.h"
 #include "catch.hpp"
 #include <iostream>
 
